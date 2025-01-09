@@ -8,14 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var viewModel: ContentViewModel = .init()
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+            Text(viewModel.responseString ?? "")
+                .bold()
         }
         .padding()
+        .task {
+            await viewModel.sendVerfyCode()
+        }
     }
 }
 
